@@ -33,5 +33,5 @@ function Import-ModulesIfNotExists {
     Write-Host "`nDone checking and importing modules."
 }
 # Import the required modules
-$modules = @('HPEOneView.850', 'Microsoft.PowerShell.Security', 'Microsoft.PowerShell.Utility')
-Import-ModulesIfNotExists -ModuleNames $modules
+$RequiredModules = @('HPEOneView.850', 'Microsoft.PowerShell.Security', 'Microsoft.PowerShell.Utility')
+Import-ModulesIfNotExists -ModuleNames $RequiredModules
