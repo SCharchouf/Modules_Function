@@ -42,15 +42,18 @@ function Import-ModulesIfNotExists {
     foreach ($ModuleName in $ModuleNames) {
         $currentModuleNumber++
         if (Get-Module -Name $ModuleName -ListAvailable) {
-            Write-Host "$ModuleName is already imported" -ForegroundColor Yellow
+            Write-Host "`tLe module $ModuleName" -NoNewline -foregroundColor Cyan
+            Write-Host "is already imported" -ForegroundColor Yellow
         } else {
             $progress = ($currentModuleNumber / $totalModules) * 100
             Write-Progress -Activity "Importing $ModuleName" -Status "Please wait..." -PercentComplete $progress
             Import-Module -Name $ModuleName -ErrorAction SilentlyContinue -ErrorVariable importError
             if ($importError) {
-                Write-Host "Failed to import $ModuleName $($importError.Exception.Message)" -ForegroundColor Red
+                Write-Host "`tFailed to import le module " -NoNewline -ForegroundColor Red
+                Write-Host "$ModuleName $($importError.Exception.Message)" -ForegroundColor Red
             } else {
-                Write-Host "Successfully imported $ModuleName" -ForegroundColor Green
+                Write-Host "`tSuccessfully imported le module" -NoNewline -ForegroundColor Green
+                Write-Host "$ModuleName" -ForegroundColor Green
             }
         }
     }
