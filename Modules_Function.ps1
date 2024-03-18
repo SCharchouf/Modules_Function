@@ -42,25 +42,25 @@ function Import-ModulesIfNotExists {
     foreach ($ModuleName in $ModuleNames) {
         $currentModuleNumber++
         if (Get-Module -Name $ModuleName -ListAvailable) {
-            Write-Host "`tLe module " -NoNewline -foregroundColor Yellow
+            Write-Host "`tThe module " -NoNewline -foregroundColor Yellow
             Write-Host "[$ModuleName] " -NoNewline -foregroundColor Cyan
-            Write-Host "is already imported" -ForegroundColor Yellow
+            Write-Host "is already imported." -ForegroundColor Yellow
         } else {
             $progress = ($currentModuleNumber / $totalModules) * 100
             Write-Progress -Activity "Importing $ModuleName" -Status "Please wait..." -PercentComplete $progress
             Import-Module -Name $ModuleName -ErrorAction SilentlyContinue -ErrorVariable importError
             if ($importError) {
-                Write-Host "`tFailed to import le module " -NoNewline -ForegroundColor Red
+                Write-Host "`tFailed to import The module " -NoNewline -ForegroundColor Red
                 Write-Host "$ModuleName $($importError.Exception.Message)" -ForegroundColor Red
             } else {
-                Write-Host "`tSuccessfully imported le module" -NoNewline -ForegroundColor Green
+                Write-Host "`tSuccessfully imported The module" -NoNewline -ForegroundColor Green
                 Write-Host "[$ModuleName]" -ForegroundColor Green
             }
         }
     }
     # Clear progress bar (optional)
     Write-Progress -Activity "Importing modules" -Completed
-    Write-Host "`nDone checking and importing modules."
+    Write-Host "`n`tDone checking and importing modules." -ForegroundColor Green
 }
 # Import the required modules
 $RequiredModules = @('HPEOneView.850', 'Microsoft.PowerShell.Security', 'Microsoft.PowerShell.Utility')
